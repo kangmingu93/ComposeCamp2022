@@ -70,7 +70,9 @@ class AnimatingCircleTests {
                 currentScreen = RallyScreen.Accounts
             )
         }
-        composeTestRule.onNodeWithContentDescription(RallyScreen.Accounts.name)
+
+        composeTestRule
+            .onNodeWithContentDescription(RallyScreen.Accounts.name)
             .assertIsSelected()
     }
 
@@ -86,7 +88,11 @@ class AnimatingCircleTests {
         }
 
         composeTestRule
-            .onNodeWithContentDescription(RallyScreen.Accounts.name)
+            .onNode(
+                hasText(RallyScreen.Accounts.name.uppercase()) and
+                        hasParent(hasContentDescription(RallyScreen.Accounts.name)),
+                useUnmergedTree = true
+            )
             .assertExists()
     }
 
